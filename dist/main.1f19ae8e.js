@@ -129,12 +129,14 @@ var _ui = _interopRequireDefault(require("./ui"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function GameData() {
-  this.p1ScoreData = 0;
-  this.p2ScoreData = 0;
-  this.gameOver = false;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  this.getWinner = function (scoreData, winScoreData) {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var GameData = function GameData() {
+  _classCallCheck(this, GameData);
+
+  _defineProperty(this, "getWinner", function (scoreData, winScoreData) {
     if (scoreData === winScoreData) {
       var ui = new _ui.default();
 
@@ -146,17 +148,21 @@ function GameData() {
         this.gameOver = true;
       }
     }
-  };
+  });
 
-  this.p1AndP2ScoreData = function () {
+  _defineProperty(this, "p1AndP2ScoreData", function () {
     this.p1ScoreData = 0;
     this.p2ScoreData = 0;
-  };
+  });
 
-  this.gameOverFalse = function () {
+  _defineProperty(this, "gameOverFalse", function () {
     this.gameOver = false;
-  };
-}
+  });
+
+  this.p1ScoreData = 0;
+  this.p2ScoreData = 0;
+  this.gameOver = false;
+};
 
 var _default = GameData;
 exports.default = _default;
@@ -172,10 +178,16 @@ var _gameData = _interopRequireDefault(require("./gameData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var data = new _gameData.default();
 
-function UI() {
-  this.selectors = function () {
+var UI = function UI() {
+  _classCallCheck(this, UI);
+
+  _defineProperty(this, "selectors", function () {
     var p1ScoreDisplayElm = document.querySelector('#p1Score');
     var p2ScoreDisplayElm = document.querySelector('#p2Score');
     var winScoreDisplayElm = document.querySelector('p span');
@@ -192,9 +204,9 @@ function UI() {
       p2BtnElm: p2BtnElm,
       resetBtnElm: resetBtnElm
     };
-  };
+  });
 
-  this.getWinnerP1 = function () {
+  _defineProperty(this, "getWinnerP1", function () {
     var _this$selectors = this.selectors(),
         p1ScoreDisplayElm = _this$selectors.p1ScoreDisplayElm,
         p1BtnElm = _this$selectors.p1BtnElm,
@@ -203,9 +215,9 @@ function UI() {
     p1ScoreDisplayElm.classList.add('winner');
     p1BtnElm.setAttribute('disabled', 'disabled');
     p2BtnElm.setAttribute('disabled', 'disabled');
-  };
+  });
 
-  this.getWinnerP2 = function () {
+  _defineProperty(this, "getWinnerP2", function () {
     var _this$selectors2 = this.selectors(),
         p2ScoreDisplayElm = _this$selectors2.p2ScoreDisplayElm,
         p1BtnElm = _this$selectors2.p1BtnElm,
@@ -214,9 +226,9 @@ function UI() {
     p2ScoreDisplayElm.classList.add('winner');
     p1BtnElm.setAttribute('disabled', 'disabled');
     p2BtnElm.setAttribute('disabled', 'disabled');
-  };
+  });
 
-  this.removeBtnScore = function () {
+  _defineProperty(this, "removeBtnScore", function () {
     var _this$selectors3 = this.selectors(),
         p1ScoreDisplayElm = _this$selectors3.p1ScoreDisplayElm,
         p2ScoreDisplayElm = _this$selectors3.p2ScoreDisplayElm,
@@ -227,9 +239,9 @@ function UI() {
     p2BtnElm.removeAttribute('disabled');
     p1ScoreDisplayElm.classList.remove('winner');
     p2ScoreDisplayElm.classList.remove('winner');
-  };
+  });
 
-  this.getWinScoreReset = function () {
+  _defineProperty(this, "getWinScoreReset", function () {
     var _this$selectors4 = this.selectors(),
         p1ScoreDisplayElm = _this$selectors4.p1ScoreDisplayElm,
         p2ScoreDisplayElm = _this$selectors4.p2ScoreDisplayElm;
@@ -239,23 +251,21 @@ function UI() {
     p2ScoreDisplayElm.textContent = 0;
     this.removeBtnScore();
     data.gameOverFalse();
-  };
+  });
 
-  this.resetGame = function () {
+  _defineProperty(this, "resetGame", function () {
     this.getWinScoreReset();
-  };
-}
+  });
+};
 
-var ui = new UI();
-
-UI.getRandom = function () {
+_defineProperty(UI, "getRandom", function () {
   var _ui$selectors = ui.selectors(),
       winScoreDisplayElm = _ui$selectors.winScoreDisplayElm;
 
   winScoreDisplayElm.textContent = _gameData.default.winScoreData;
-};
+});
 
-UI.init = function () {
+_defineProperty(UI, "init", function () {
   var _ui$selectors2 = ui.selectors(),
       p1ScoreDisplayElm = _ui$selectors2.p1ScoreDisplayElm,
       p2ScoreDisplayElm = _ui$selectors2.p2ScoreDisplayElm,
@@ -289,8 +299,9 @@ UI.init = function () {
   resetBtnElm.addEventListener('click', function () {
     return ui.resetGame();
   });
-};
+});
 
+var ui = new UI();
 var _default = UI;
 exports.default = _default;
 },{"./gameData":"gameData.js"}],"main.js":[function(require,module,exports) {
@@ -335,7 +346,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2719" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "14228" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

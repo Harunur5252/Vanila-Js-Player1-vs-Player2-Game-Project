@@ -1,7 +1,11 @@
 import GameData from "./gameData"
 const data = new GameData()
-function UI(){
-    this.selectors=function(){
+
+class UI{
+    constructor(){
+
+    }
+    selectors=function(){
         const p1ScoreDisplayElm    = document.querySelector('#p1Score')
         const p2ScoreDisplayElm    = document.querySelector('#p2Score')
         const winScoreDisplayElm   = document.querySelector('p span')
@@ -19,7 +23,7 @@ function UI(){
             resetBtnElm
         }
     }
-    this.getWinnerP1=function(){
+    getWinnerP1=function(){
         const{ p1ScoreDisplayElm,
             p1BtnElm,
             p2BtnElm,
@@ -28,7 +32,7 @@ function UI(){
             p1BtnElm.setAttribute('disabled','disabled')
             p2BtnElm.setAttribute('disabled','disabled')
     }
-    this.getWinnerP2=function(){
+    getWinnerP2=function(){
         const{
             p2ScoreDisplayElm,
             p1BtnElm,
@@ -38,7 +42,7 @@ function UI(){
           p1BtnElm.setAttribute('disabled','disabled')
           p2BtnElm.setAttribute('disabled','disabled')
     }
-    this.removeBtnScore=function(){
+    removeBtnScore=function(){
         const{ p1ScoreDisplayElm,
             p2ScoreDisplayElm,
             p1BtnElm,
@@ -49,7 +53,7 @@ function UI(){
         p1ScoreDisplayElm.classList.remove('winner')
         p2ScoreDisplayElm.classList.remove('winner')
     }
-    this.getWinScoreReset=function(){
+    getWinScoreReset=function(){
 
         const{ p1ScoreDisplayElm,
             p2ScoreDisplayElm,
@@ -60,50 +64,48 @@ function UI(){
         this.removeBtnScore()
         data.gameOverFalse()
     }
-    this.resetGame=function(){
+    resetGame=function(){
         this.getWinScoreReset()
+    }
+    static getRandom=function(){
+        const {winScoreDisplayElm}=ui.selectors()
+        winScoreDisplayElm.textContent=GameData.winScoreData
+    }
+    static init=function(){
+        const{ p1ScoreDisplayElm,
+            p2ScoreDisplayElm,
+            inputScoreDisplayElm,
+            winScoreDisplayElm,
+            p1BtnElm,
+            p2BtnElm,
+            resetBtnElm
+          }=ui.selectors()
+          p1BtnElm.addEventListener('click',()=>{
+            if(!data.gameOver){
+                data.p1ScoreData++
+                data.getWinner(data.p1ScoreData,GameData.winScoreData)
+                p1ScoreDisplayElm.textContent=data.p1ScoreData
+            }
+        })
+        p2BtnElm.addEventListener('click',()=>{
+            if(!data.gameOver){
+                data.p2ScoreData++
+                data.getWinner(data.p2ScoreData,GameData.winScoreData)
+                p2ScoreDisplayElm.textContent=data.p2ScoreData
+            }  
+        })
+        inputScoreDisplayElm.addEventListener('change',()=>{
+            const convertNumber = Number(inputScoreDisplayElm.value)
+            winScoreDisplayElm.textContent=convertNumber
+            GameData.winScoreData=convertNumber
+            inputScoreDisplayElm.value=''
+            ui.getWinScoreReset()
+        })
+        resetBtnElm.addEventListener('click',()=>ui.resetGame())
     }
 }
 
 const ui = new UI()
-UI.getRandom=function(){
-    const {winScoreDisplayElm}=ui.selectors()
-    winScoreDisplayElm.textContent=GameData.winScoreData
-}
-
-UI.init=function(){
-    const{ p1ScoreDisplayElm,
-        p2ScoreDisplayElm,
-        inputScoreDisplayElm,
-        winScoreDisplayElm,
-        p1BtnElm,
-        p2BtnElm,
-        resetBtnElm
-      }=ui.selectors()
-      p1BtnElm.addEventListener('click',()=>{
-        if(!data.gameOver){
-            data.p1ScoreData++
-            data.getWinner(data.p1ScoreData,GameData.winScoreData)
-            p1ScoreDisplayElm.textContent=data.p1ScoreData
-        }
-    })
-    p2BtnElm.addEventListener('click',()=>{
-        if(!data.gameOver){
-            data.p2ScoreData++
-            data.getWinner(data.p2ScoreData,GameData.winScoreData)
-            p2ScoreDisplayElm.textContent=data.p2ScoreData
-        }  
-    })
-    inputScoreDisplayElm.addEventListener('change',()=>{
-        const convertNumber = Number(inputScoreDisplayElm.value)
-        winScoreDisplayElm.textContent=convertNumber
-        GameData.winScoreData=convertNumber
-        inputScoreDisplayElm.value=''
-        ui.getWinScoreReset()
-    })
-    resetBtnElm.addEventListener('click',()=>ui.resetGame())
-}
-
 export default UI
 
 
