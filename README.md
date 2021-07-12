@@ -6,10 +6,10 @@ This is a simple game that's made by javaScript
 + create a simple UI(user interface)
 + Initial state have three buttons player1 , player2 and reset 
 + when click on player1 or player2 button then increase their value and show it's value on ui
-+ according to given value in the (Playing to : value) option a player will win and at that time two player button is disabled and game over occur.
++ according to the given value in the (Playing to : value) option a player will win and at that time two player button is disabled and game over occur.
 + when game over is occur then you can reset the game.
 + through browser refresh each time a random value is add on this(Playing to : value) option.
-+ Manually , you can give a number in the input field and on that time the (Playing to : value) option value will change according to given value.
++ Manually , you can give a number in the input field and on that time the (Playing to : value) option value will change according to the given value.
 
 ## Project Picture
 
@@ -55,7 +55,7 @@ Note that webpack will not alter any code other than import and export statement
 
 
 ## Webpack Prerequisites
-Before we begin, make sure you have a fresh version of Node.js installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
+Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
 
 
 ## Basic Setup
