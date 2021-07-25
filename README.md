@@ -3,7 +3,7 @@
 # Player1 vs Player2 Game 
 This is a simple game that's made by javaScript   
 
-# Project Specifications
+## Project Specifications
 
 + create a simple UI(user interface)
 + Initial state have three buttons player1 , player2 and reset 
